@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Short Polling Example</title>
+  </head>
+  <body>
+    <h1>Short Polling Example</h1>
+
+    <div id="data-container"></div>
+    <script>
+      async function fetchData() {
+        try {
+          const response = await fetch("/getData");
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const data = await response.json();
+          document.getElementById("data-container").innerText =
+            JSON.stringify(data);
+        } catch (error) {
+          console.error("Fetch error:", error);
+        }
+      }
+      let intervalId;
+      function startPolling() {
+        console.log("Starting short polling...");
+        intervalId = setInterval(() => {
+          fetchData();
+        }, 5000); // Poll every 5 seconds
+      }
+      startPolling();
+      clearInterval(intervalId); // Clear any previous intervals
+    </script>
+  </body>
+</html>
