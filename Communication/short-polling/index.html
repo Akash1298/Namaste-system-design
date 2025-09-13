@@ -27,11 +27,12 @@
       function startPolling() {
         console.log("Starting short polling...");
         intervalId = setInterval(() => {
+          console.log("CALLLEDD");
           fetchData();
         }, 5000); // Poll every 5 seconds
       }
       startPolling();
-      clearInterval(intervalId); // Clear any previous intervals
+      // clearInterval(intervalId); // Clear any previous intervals
     </script>
   </body>
 </html>
